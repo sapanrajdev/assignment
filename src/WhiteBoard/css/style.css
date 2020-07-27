@@ -133,6 +133,7 @@ button:focus{
 .text {
   border: 0px;
   min-height: 50px;
+  background: transparent;
 }
 
 .text::placeholder{
