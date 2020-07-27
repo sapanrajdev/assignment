@@ -10,6 +10,7 @@ export class WhiteBoard extends Component {
     size: 3,
   };
   canvas = createRef();
+  text = '';
   startX;
   startY;
   isPainting = false;
@@ -25,6 +26,14 @@ export class WhiteBoard extends Component {
     this.ctx.lineJoin = 'round';
     this.ctx.lineCap = 'round';
     this.ctx.lineWidth = 3;
+    const self = this;
+    window.addEventListener('keyup', function (e) {
+      if (self.activeCursor === 'text') {
+        if (e.keyCode === 13) {
+          self.drawText(self.text);
+        }
+      }
+    })
   }
 
   onMouseDown = ({ nativeEvent }) => {
@@ -33,6 +42,11 @@ export class WhiteBoard extends Component {
     this.startY = offsetY;
     this.isPainting = true;
     this.prevPos = { offsetX, offsetY };
+    if (this.activeCursor === 'text') {
+      this.setState({
+        openModal: true
+      });
+    }
   };
 
   onMouseMove = ({ nativeEvent }) => {
@@ -97,6 +111,22 @@ export class WhiteBoard extends Component {
     }
   };
 
+  handleCloseModal = () => {
+    this.setState({
+      openModal: false,
+    }, () => this.text = '');
+  };
+
+  drawText = (value) => {
+    this.ctx.font = `${this.state.size * 2}px sans-serif`;
+    this.ctx.fillText(value, this.startX, this.startY);
+    this.handleCloseModal();
+  }
+
+  setText = e => {
+    this.text = e.target.value;
+  }
+
   drawPencil = (x, y, offsetX, offsetY, isStraightLine) => {
     this.ctx.moveTo(x, y);
     this.ctx.lineTo(offsetX, offsetY);
@@ -132,7 +162,9 @@ export class WhiteBoard extends Component {
     this.ctx.stroke();
     if (this.activeCursor === 'rect-fill' || this.activeCursor === 'circle-fill') {
       this.ctx.fillStyle = this.userStrokeStyle;
+      this.ctx.lineWidth = this.state.size;
       this.ctx.fill();
+
     }
   };
 
@@ -176,10 +208,14 @@ export class WhiteBoard extends Component {
       <Container
         ref={this.canvas}
         {...this.state}
+        startX={this.startX}
+        startY={this.startY}
         increment={this.increment}
         decrement={this.decrement}
         userStrokeStyle={this.userStrokeStyle}
         activeCursor={this.activeCursor}
+        setText={this.setText}
+        handleCloseModal={this.handleCloseModal}
         handleChangeColor={this.handleChangeColor}
         changeActive={this.changeActive}
         togglePopup={this.togglePopup}
@@ -188,6 +224,7 @@ export class WhiteBoard extends Component {
         onMouseLeave={this.endPaintEvent}
         onMouseUp={this.endPaintEvent}
         onMouseMove={this.onMouseMove}
+        drawText={this.drawText}
       />
     );
   }

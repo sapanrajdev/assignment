@@ -129,3 +129,21 @@ button:focus{
   from {opacity: 0;}
   to {opacity:1 ;}
 }
+
+.text {
+  border: 0px;
+  min-height: 50px;
+}
+
+.text::placeholder{
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.text:focus{
+  outline: none;
+}
+.close {
+  position: absolute;
+  cursor: pointer;
+}

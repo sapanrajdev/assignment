@@ -5,6 +5,7 @@ export const Section = React.forwardRef((props, ref) => (
     <canvas
       id="canvas"
       ref={ref}
+      onKeyUp={props.drawText}
       onMouseDown={props.onMouseDown}
       onMouseLeave={props.onMouseLeave}
       onMouseUp={props.onMouseUp}

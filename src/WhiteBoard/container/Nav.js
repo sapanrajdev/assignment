@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { ColorPicker, Line, Shape, Erase, ResizeCursor } from '../components'
+import { ColorPicker, Line, Shape, Text, Erase, ResizeCursor } from '../components';
 import fullscreenImg from '../images/fullscreen.PNG';
 import closescreen from '../images/closescreen.PNG';
 import { paintUtils } from '../utils/paint.utils';
@@ -33,6 +33,10 @@ export const Nav = props => {
 
         <li className="tab-inline-item">
           <Shape {...props} />
+        </li>
+
+        <li className="tab-inline-item">
+          <Text {...props} />
         </li>
 
         <li className="tab-inline-item">
