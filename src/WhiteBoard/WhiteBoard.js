@@ -4,6 +4,7 @@ import { Container } from './container';
 
 import './css/style.css';
 import './css/align.css';
+import { paintUtils } from './utils/paint.utils';
 
 export class WhiteBoard extends Component {
   state = {
@@ -119,6 +120,7 @@ export class WhiteBoard extends Component {
 
   drawText = (value) => {
     this.ctx.font = `${this.state.size * 2}px sans-serif`;
+    this.ctx.fillStyle = this.userStrokeStyle;
     this.ctx.fillText(value, this.startX, this.startY);
     this.handleCloseModal();
   }
@@ -203,6 +205,10 @@ export class WhiteBoard extends Component {
       }), () => this.ctx.lineWidth = this.state.size)
   };
 
+  download = () => {
+    paintUtils.download('canvas');
+  }
+
   render() {
     return (
       <Container
@@ -225,6 +231,7 @@ export class WhiteBoard extends Component {
         onMouseUp={this.endPaintEvent}
         onMouseMove={this.onMouseMove}
         drawText={this.drawText}
+        download={this.download}
       />
     );
   }

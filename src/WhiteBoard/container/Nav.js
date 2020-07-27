@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { ColorPicker, Line, Shape, Text, Erase, ResizeCursor } from '../components';
+import { ColorPicker, Line, Shape, Text, Erase, ResizeCursor, Download } from '../components';
 import fullscreenImg from '../images/fullscreen.PNG';
 import closescreen from '../images/closescreen.PNG';
 import { paintUtils } from '../utils/paint.utils';
@@ -43,7 +43,7 @@ export const Nav = props => {
           <Erase {...props} />
         </li>
 
-        <li className="tab-inline-item">
+        <li style={{marginTop: '-15px', marginBottom: '15px'}} className="tab-inline-item">
           <ResizeCursor {...props} />
         </li>
 
@@ -56,6 +56,9 @@ export const Nav = props => {
               alt="fullscreen"
               src={fullscreenImg} />
           </button>
+        </li>
+        <li className="tab-inline-item">
+          <Download {...props} />
         </li>
 
       </ul>

@@ -5,3 +5,4 @@ export * from './Text';
 export * from './Erase';
 export * from './ResizeCursor';
 export * from './OpenText';
+export * from './Download';

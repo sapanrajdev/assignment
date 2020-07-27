@@ -1,5 +1,5 @@
 import React from 'react';
-import { WhiteBoard } from './WhiteBoard/WhiteBoard';
+import { WhiteBoard } from './WhiteBoard';
 
 function App() {
   return (
